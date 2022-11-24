@@ -1,0 +1,9 @@
+FROM openjdk
+WORKDIR usr/lib
+
+ENV MONGO_DATABASE="wave33trackdb"
+ENV MONGO_URL="mongodb://localhost:27017/wave33trackdb"
+
+ADD ./target/userTrackService-pc1-0.0.1-SNAPSHOT.jar /usr/lib/userTrackService-pc1-0.0.1-SNAPSHOT.jar
+
+ENTRYPOINT ["java","-jar","userTrackService-pc1-0.0.1-SNAPSHOT.jar"]

@@ -1,0 +1,4 @@
+FROM openjdk
+WORKDIR usr/lib
+ADD ./target/userAuthentication-pc1-0.0.1-SNAPSHOT.jar /usr/lib/userAuthentication-pc1-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","userAuthentication-pc1-0.0.1-SNAPSHOT.jar"]
