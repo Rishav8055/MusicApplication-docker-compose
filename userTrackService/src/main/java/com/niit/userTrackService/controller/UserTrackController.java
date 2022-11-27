@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
+@RequestMapping("/usertrack/user")
 public class UserTrackController {
     private TrackService trackService;
     private ResponseEntity responseEntity;

@@ -1,43 +1,63 @@
-version: '3.9'
+version:  '3.9'
 services:
-  track-service:
-    image: track_image
-    container_name: track-service
+  track-Service:
+    image:  track-image
+    container_name: track-Service
     build:  userTrackService/
-    restart: always
-    network_mode: user-network
+    restart:  always
+    networks:
+      - product_net
     ports:
-      - 64100:64100
+      - 9500:9500
     depends_on:
       - mongoService
+      - apigateway
 
   mongoService:
-    image: mongo
-    container_name: mongoService
+    image:  mongo
+    container_name: mongo-Service
     ports:
       - 27017:27017
-    network_mode: user-network
+    networks:
+      - product_net
 
   authentication-service:
-    image: authentication_image
+    image:  authentication-image
     container_name: authentication-service
-    build: userAuthentication/
-    restart: always
-    network_mode: user-network
+    build:  userAuthentication-pc1/
+    restart:  always
+    networks:
+      - product_net
     ports:
-      - 64200:64200
+      - 9100:9100
     depends_on:
       - mysqlService
+      - apigateway
 
   mysqlService:
-    image: mysql:latest
-    container_name: mysqlService
-    network_mode: user-network
+    image:  mysql:latest
+    container_name: mysql-service
+    networks:
+      - product_net
     ports:
       - 3306:3306
-
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD:  root
       MYSQL_USERNAME: root
       MYSQL_PASSWORD: root
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+  apigateway:
+    container_name: apigateway
+    build:  SpringCloudAPIGateway/
+    networks:
+      - product_net
+    ports:
+      - 9000:9000
+
+networks:
+  product_net:
+    driver: bridge
+
+
+
