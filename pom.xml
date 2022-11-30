@@ -33,6 +33,7 @@
 		<module>userAuthentication-pc1</module>
 		<module>userTrackService</module>
 		<module>SpringCloudAPIGateway</module>
+		<module>EurekaServer</module>
 	</modules>
 
 	<build>
